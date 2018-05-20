@@ -1,0 +1,89 @@
+<html dir="rtl">
+<head>
+<title>PatternMaker</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="btns">
+      <button id='fileBtn'>בחר תמונה</button>
+      <input type="file" id='getFile' accept="image/*" onchange="readURL(this)" class="hidden">
+      <button onclick="init()">שכפל</button>
+      <button id='btn'>הפוך לתמונה</button>
+      <button onclick="downloadImg()">שמור תמונה</button>
+</div>
+<div class="img-area">
+  <canvas id="canvas" width='560' height="560" class="the-img">
+  </canvas>
+</div>
+<div class="img-area">
+  <img crossOrigin="Anonymous" id='tile'  class="the-img">
+</div>
+<P class="credit">Tsuf Cohen 2018&#169;</p>
+<script>
+var tile = document.getElementById('tile');
+var download =document.getElementById('dwld');
+$('#tile').hide();
+$('#canvas').hide();
+var img = new Image();
+// img.src = '';
+$('#fileBtn').click(() => {
+   $('#getFile').click();
+ $('#fileBtn').html('תמונה נבחרה');
+$('#fileBtn').addClass('chosen');
+ });
+btn.onclick = function(event) {
+  var tmp = canvas.toDataURL();
+  tile.src = tmp;
+  //tile.style.display = 'inline';
+  //tile.classList.add('rotate');
+  $('#canvas').hide(100);
+  $('#tile').delay(200).show(200);
+}
+function downloadImg() {
+  var link = document.createElement('a');
+   link.setAttribute('href', tile.src);
+   link.setAttribute('download', 'tile.png');
+   link.click();
+   location.reload();
+}
+
+function init() {
+  var canvas = document.getElementById('canvas');
+  var ctx = canvas.getContext('2d');
+  $('#tile').hide(100);
+  $('#canvas').delay(200).show(200);
+  // tile.style.display = 'none';
+ // tile.classList.remove('rotate');
+var x = 140;
+var count = 0;
+var rotation =[0,90,270,180];
+var d =[[0,0],[2,0],[0,2],[2,2]];
+d.forEach(function(elm) {
+  for(j=0;j<4;j++){
+     ctx.translate(elm[0]*x+x,elm[1]*x+x);
+     ctx.rotate(rotation[count]*Math.PI/180);
+    ctx.drawImage(img,0, 0, x, x);
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    // console.log(rotation[count]);
+    count = (count < 3)? count+1: 0;
+  }
+});
+}
+function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $(img)
+                        .attr('src', e.target.result);
+                };
+              reader.readAsDataURL(input.files[0]);
+            }
+        }
+// window.onload = init;
+</script>
+
+</body>
+</html>
