@@ -1,3 +1,4 @@
+
 <html dir="rtl">
 <head>
 <title>PatternMaker</title>
@@ -7,21 +8,27 @@
 </head>
 <body>
 <div class="btns">
-      <button id='fileBtn'>בחר תמונה</button>
-      <input type="file" id='getFile' accept="image/*" onchange="readURL(this)" class="hidden">
-      <button onclick="init()">שכפל</button>
-      <button id='btn'>הפוך לתמונה</button>
+      <button id="fileBtn">בחר תמונה</button>
+      <input type="file" id="getFile" accept="image/*" onchange="readURL(this)" class="hidden">
+      <button onclick="init()" class="s-btn"><img src="w-r.png" width="20"></button>
+	<button onclick="initS()" class="s-btn"><img src="wo-r.png" width="20"></button>
+      <button id="btn" >הפוך לתמונה</button>
       <button onclick="downloadImg()">שמור תמונה</button>
 </div>
 <div class="img-area">
-  <canvas id="canvas" width='560' height="560" class="the-img">
+  <canvas id="canvas" width="560" height="560" class="the-img">
   </canvas>
 </div>
 <div class="img-area">
-  <img crossOrigin="Anonymous" id='tile'  class="the-img">
+  <img crossOrigin="Anonymous" id="tile"  class="the-img">
 </div>
-<P class="credit">Tsuf Cohen 2018&#169;</p>
+<p class="credit">Tsuf Cohen 2018&#169;</p>
 <script>
+	window.onload = function() {
+	if(window.innerWidth > 769){
+		$('.s-btn').html("שכפל "+ $('.s-btn').html());
+	}	
+	}
 var tile = document.getElementById('tile');
 var download =document.getElementById('dwld');
 $('#tile').hide();
@@ -70,6 +77,28 @@ d.forEach(function(elm) {
     count = (count < 3)? count+1: 0;
   }
 });
+}
+function initS() {
+  var canvas = document.getElementById('canvas');
+  var ctx = canvas.getContext('2d');
+  $('#tile').hide(100);
+  $('#canvas').delay(200).show(200);
+  // tile.style.display = 'none';
+ // tile.classList.remove('rotate');
+var x = 140;
+//var count = 0;
+//var rotation =[0,90,270,180];
+//var d =[[0,0],[2,0],[0,2],[2,2]];
+//d.forEach(function(elm) {
+for(i=0;i<4;i++){
+  for(j=0;j<4;j++){
+    
+    ctx.drawImage(img,i*x, j*x, x, x);
+   
+    // console.log(rotation[count]);
+    
+  }}
+//});
 }
 function readURL(input) {
             if (input.files && input.files[0]) {

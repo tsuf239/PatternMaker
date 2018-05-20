@@ -69,14 +69,20 @@ margin: auto;
         border: 1.8px solid #EDEEF2;
     }
     .btns {
-      height: 18%
+      height: 18%;
+	display: inline-block;
+		vertical-align: middle;
     }
     .img-area {
-
       margin: 40% auto;
     }
     .the-img {
     width: 85%;
     }
+	.s-btn {
+		width:20%;
+		padding: 1.5%;
+		/*margin-bottom: -2%;*/
+	}
 
 }
